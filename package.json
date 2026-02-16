@@ -1,0 +1,21 @@
+{
+  "name": "smart_home",
+  "version": "0.0.1",
+  "description": "Smart Home Server",
+  "homepage": "https://github.com/DimaDostoevskiy/smart_home#readme",
+  "bugs": {
+    "url": "https://github.com/DimaDostoevskiy/smart_home/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimaDostoevskiy/smart_home.git"
+  },
+  "license": "ISC",
+  "author": "DimaDostoevskiy",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  }
+}
