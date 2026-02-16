@@ -1,7 +1,3 @@
-import http from 'http';
-
-const PORT = 3000;
-
 const homePage = `
 <!DOCTYPE html>
 <html lang="ru">
@@ -17,16 +13,27 @@ const homePage = `
 </html>
 `;
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/' || req.url === '/home') {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(homePage);
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('404 Not Found');
-  }
-});
+export default {
+  /**
+   * Cloudflare Workers entrypoint (Module Worker format).
+   * @param {Request} request
+   */
+  async fetch(request) {
+    const url = new URL(request.url);
 
-server.listen(PORT, () => {
-  console.log(`Сервер запущен: http://localhost:${PORT}`);
-});
+    if (url.pathname === '/' || url.pathname === '/home') {
+      return new Response(homePage, {
+        headers: {
+          'content-type': 'text/html; charset=utf-8',
+        },
+      });
+    }
+
+    return new Response('404 Not Found', {
+      status: 404,
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+      },
+    });
+  },
+};
